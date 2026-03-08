@@ -1,0 +1,39 @@
+# =============================================================================
+# helloworld-demo-python — GitHub Actions pipeline
+#
+# This file is the only addition to the application repo. The full pipeline
+# is defined in the platform repo (CluePointsDevOpsPoC) and called here as
+# a reusable workflow.
+#
+# To change the major or minor version, update APP_VERSION_MAJOR or
+# APP_VERSION_MINOR below and merge the change to main via a pull request.
+#
+# Required secrets (set on this repo in GitHub → Settings → Secrets and variables → Actions):
+#   DOCKER_HUB_USERNAME       — Docker Hub account name
+#   DOCKER_HUB_TOKEN          — Docker Hub access token
+#   KUBECONFIG_DATA           — base64-encoded kubeconfig: base64 -w0 kubeconfig.yaml
+#   TF_TOKEN_app_terraform_io — Terraform Cloud API token
+#
+# Required variables (set on this repo in GitHub → Settings → Secrets and variables → Actions):
+#   INGRESS_BASE_DOMAIN — base domain for ingress hostnames (e.g. example.com)
+#
+# Approval gate for prod:
+#   Settings → Environments → prod → Protection rules → Required reviewers
+# =============================================================================
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pipeline:
+    permissions:
+      contents: write   # required by build-image to push the version git tag
+    uses: Kolossi/CluePointsDevOpsPoC/.github/workflows/pipeline.yml@v1.0.33
+    with:
+      APP_VERSION_MAJOR: "1"
+      APP_VERSION_MINOR: "0"
+      DOCKER_HUB_USERNAME: ${{ vars.DOCKER_HUB_USERNAME }}
+      INGRESS_BASE_DOMAIN: ${{ vars.INGRESS_BASE_DOMAIN }}
+    secrets: inherit
