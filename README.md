@@ -100,4 +100,4 @@ Hello from Docker!
 
 ## DevOps Demo
 
-uses `Kolossi/CluePointsDevOpsPoC`
+uses `Kolossi/CluePointsDevOpsPoC` to build
