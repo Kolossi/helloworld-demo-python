@@ -99,3 +99,5 @@ Hello from Docker!
 
 
 ## DevOps Demo
+
+uses `Kolossi/CluePointsDevOpsPoC`
