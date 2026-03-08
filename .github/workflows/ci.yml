@@ -34,5 +34,6 @@ jobs:
     with:
       APP_VERSION_MAJOR: "1"
       APP_VERSION_MINOR: "0"
+      DOCKER_HUB_USERNAME: ${{ vars.DOCKER_HUB_USERNAME }}
       INGRESS_BASE_DOMAIN: ${{ vars.INGRESS_BASE_DOMAIN }}
     secrets: inherit
